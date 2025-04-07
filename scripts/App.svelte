@@ -1,8 +1,44 @@
 <script>
 	export let name;
+
+
 </script>
 
-<h2>Hello {name}! 🧝🏿</h2>
+<h1>Pitchou - service fait</h1>
+
+<form>
+	<label>
+		Template .odt
+		<input type="file" >
+	</label>
+	<label>
+		Prénom Nom
+		<input type="text" autocomplete="name">
+	</label>
+	<label>
+		Nombre de jours facturés
+		<input type="number" step="0.5" min="0" max="31">
+	</label>
+	<label>
+		Libellé de la prestation
+		<input type="text" autocomplete="pitchou service-fait libéllé">
+	</label>
+	<label>
+		Période de prestation
+		<input type="month">
+		<input type="year">
+	</label>
+	<label>
+		Livrables et prestations réalisées
+		<textarea>
+
+		</textarea>
+	</label>
+	
+
+</form>
+
+
 
 <style lang="scss">
 	
@@ -17,11 +53,14 @@
 		}
 	}
 
-	h2 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
+	form{
+		display: flex;
+		flex-direction: column;
+
+
+		label{
+
+		}
 	}
 	
 </style>
