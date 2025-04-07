@@ -33,9 +33,10 @@
 
 		const serviceFaitOdtArrayBuffer = await fillOdtTemplate(templateAB, data)
 
-		console.log('serviceFaitOdtArrayBuffer', serviceFaitOdtArrayBuffer)
-
-		télécharger(new Blob(serviceFaitOdtArrayBuffer), `service-fait.odt`)
+		télécharger(
+			new Blob([serviceFaitOdtArrayBuffer], {type: 'application/vnd.oasis.opendocument.text'}), 
+			`service-fait.odt`
+		)
 	}
 
 	async function télécharger(blob, nomFichier){
@@ -58,7 +59,7 @@
 	</label>
 	<label>
 		Prénom Nom
-		<input bind:value={nomComplet} type="text" autocomplete="name">
+		<input bind:value={nomComplet} type="text" autocomplete="name" name="nomComplet">
 	</label>
 	<label>
 		Nombre de jours facturés
@@ -66,7 +67,7 @@
 	</label>
 	<label>
 		Libellé de la prestation
-		<input type="text" autocomplete="pitchou service-fait libéllé">
+		<input type="text" autocomplete="name">
 	</label>
 	<label>
 		Période de prestation
