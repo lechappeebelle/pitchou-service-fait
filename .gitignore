@@ -2,4 +2,7 @@ node_modules/
 
 build/*
 
+.~lock*
+
 lbc-service-fait*
+!lbc-service-fait.odt
