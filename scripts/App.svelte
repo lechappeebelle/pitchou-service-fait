@@ -9,6 +9,19 @@
     $: template = templateFiles && templateFiles[0]
 
 	let nomComplet;
+	let responsableOpérationnel = ''; // à faire un jour
+	let libellé;
+	let mois;
+	let année;
+	let nombreJoursFacturés;
+	let réalisations;
+
+	const maintenant = new Date()
+
+	mois = maintenant.toLocaleDateString('fr-FR', {month: 'long'})
+	année = maintenant.toLocaleDateString('fr-FR', {year: 'numeric'})
+
+
 
 	// pré-charger le bon template
 	fetch('./data/lbc-service-fait.odt')
@@ -26,7 +39,17 @@
 		e.preventDefault()
 
 		const data = {
-			nomComplet
+			nomComplet,
+			responsableOpérationnel, // à faire un jour
+			libellé, 
+			mois,
+			année,
+			nombreJoursFacturés,
+			réalisations: {
+				produit: [],
+				déploiement: [],
+				autre: []
+			}
 		}
 
 		const templateAB = await template.arrayBuffer()
@@ -59,20 +82,33 @@
 	</label>
 	<label>
 		Prénom Nom
-		<input bind:value={nomComplet} type="text" autocomplete="name" name="nomComplet">
-	</label>
-	<label>
-		Nombre de jours facturés
-		<input type="number" step="0.5" min="0" max="31">
+		<input bind:value={nomComplet} type="text" autocomplete="on" name="nomComplet">
 	</label>
 	<label>
 		Libellé de la prestation
-		<input type="text" autocomplete="name">
+		<input bind:value={libellé} type="text" autocomplete="on" name="libellé">
 	</label>
 	<label>
 		Période de prestation
-		<input type="month">
-		<input type="year">
+		<select bind:value={mois}>
+			<option>janvier</option>
+			<option>février</option>
+			<option>mars</option>
+			<option>avril</option>
+			<option>mai</option>
+			<option>juin</option>
+			<option>juillet</option>
+			<option>août</option>
+			<option>septembre</option>
+			<option>octobre</option>
+			<option>novembre</option>
+			<option>décembre</option>
+		</select>
+		<input bind:value={année} type="number" min="2020" step="1">
+	</label>
+	<label>
+		Nombre de jours facturés
+		<input bind:value={nombreJoursFacturés} type="number" step="0.5" min="0" max="31">
 	</label>
 	<label>
 		Livrables et prestations réalisées
