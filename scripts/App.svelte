@@ -14,7 +14,17 @@
 	let mois;
 	let année;
 	let nombreJoursFacturés;
-	let réalisations;
+	let réalisations
+
+
+	/** @type {FileList | undefined} */
+    let réalisationFiles;
+    $: réalisationFile = réalisationFiles && réalisationFiles[0]
+
+	let réalisationsString;
+	$: réalisationFile && réalisationFile.text().then(jsonString => { réalisationsString = jsonString })
+
+	$: réalisations = typeof réalisationsString === 'string' && JSON.parse(réalisationsString)
 
 	const maintenant = new Date()
 
@@ -45,7 +55,7 @@
 			mois,
 			année,
 			nombreJoursFacturés,
-			réalisations: {
+			réalisations: réalisations || {
 				produit: [],
 				déploiement: [],
 				autre: []
@@ -112,9 +122,9 @@
 	</label>
 	<label>
 		Livrables et prestations réalisées
-		<textarea>
-
-		</textarea>
+		<textarea bind:value={réalisationsString}></textarea>
+		Remplir via un fichier 
+		<input type="file" bind:files={réalisationFiles}>
 	</label>
 	
 	<button type="submit">Créer le service-fait !</button>
