@@ -22,6 +22,7 @@
     "svelte-preprocess": "^5.1.3"
   },
   "dependencies": {
-    "ods-xlsx": "github:DavidBruant/ods-xlsx#v0.13.0"
+    "ods-xlsx": "github:DavidBruant/ods-xlsx#v0.13.0",
+    "trello.js": "^1.2.7"
   }
 }

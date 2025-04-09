@@ -6,3 +6,7 @@ build/*
 
 lbc-service-fait*
 !lbc-service-fait.odt
+
+.env
+
+réalisations.json
