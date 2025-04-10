@@ -118,7 +118,7 @@
 	</label>
 	<label>
 		Nombre de jours facturés
-		<input bind:value={nombreJoursFacturés} type="number" step="0.5" min="0" max="31">
+		<input bind:value={nombreJoursFacturés} type="number" step="0.5" min="0">
 	</label>
 	<label>
 		Livrables et prestations réalisées
