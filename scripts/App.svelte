@@ -31,14 +31,15 @@
 	mois = maintenant.toLocaleDateString('fr-FR', {month: 'long'})
 	année = maintenant.toLocaleDateString('fr-FR', {year: 'numeric'})
 
+	const documentTypeURL = './data/lbc-service-fait.odt'
 
 
 	// pré-charger le bon template
-	fetch('./data/lbc-service-fait.odt')
+	fetch(documentTypeURL)
         .then(r => r.blob())
         .then(blob => {
             //console.log('blob', blob)
-            const file = new File([blob], 'template-service-fait.odt')
+            const file = new File([blob], 'lbc-service-fait.odt')
             let container = new DataTransfer(); 
             container.items.add(file);
             templateInput.files = container.files;
@@ -87,19 +88,21 @@
 
 <form on:submit={créerServiceFait}>
 	<label>
-		Template .odt
+		<span>Template .odt</span>
 		<input bind:this={templateInput} bind:files={templateFiles} accept=".odt" type="file">
+		<small><a href={documentTypeURL}>Document-type</a> (déjà chargé par défaut)</small>
 	</label>
+	
 	<label>
-		Prénom Nom
+		<span>Nom complet</span>
 		<input bind:value={nomComplet} type="text" autocomplete="on" name="nomComplet">
 	</label>
 	<label>
-		Libellé de la prestation
+		<span>Libellé de la prestation</span>
 		<input bind:value={libellé} type="text" autocomplete="on" name="libellé">
 	</label>
 	<label>
-		Période de prestation
+		<span>Période de prestation</span>
 		<select bind:value={mois}>
 			<option>janvier</option>
 			<option>février</option>
@@ -117,13 +120,13 @@
 		<input bind:value={année} type="number" min="2020" step="1">
 	</label>
 	<label>
-		Nombre de jours facturés
+		<span>Nombre de jours facturés</span>
 		<input bind:value={nombreJoursFacturés} type="number" step="0.5" min="0">
 	</label>
 	<label>
-		Livrables et prestations réalisées
+		<span>Livrables et prestations réalisées</span>
 		<textarea bind:value={réalisationsString}></textarea>
-		Remplir via un fichier 
+		Remplir via un fichier (réalisations.json)
 		<input type="file" bind:files={réalisationFiles}>
 	</label>
 	
@@ -135,13 +138,17 @@
 <style lang="scss">
 	
 	:global(main) {
+		display: flex;
+
 		text-align: left;
 		padding: 1em;
 		max-width: 240px;
 		margin: 0 auto;
 
 		@media (min-width: 640px) {
-			max-width: none;
+			max-width: 80rem;
+			
+			
 		}
 	}
 
@@ -151,7 +158,18 @@
 
 
 		label{
+			display: flex;
+			flex-direction: column;
 
+			margin-bottom: 0.7rem;
+
+			span{
+				font-weight: bold;
+			}
+
+			&:last-of-type{
+				margin-bottom: 2rem;
+			}
 		}
 
 		button{
