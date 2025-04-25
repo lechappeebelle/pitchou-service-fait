@@ -69,7 +69,7 @@
 
 		télécharger(
 			new Blob([serviceFaitOdtArrayBuffer], {type: 'application/vnd.oasis.opendocument.text'}), 
-			`service-fait.odt`
+			`service-fait-${mois}-${année}.odt`
 		)
 	}
 
