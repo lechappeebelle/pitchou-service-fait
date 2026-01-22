@@ -120,6 +120,9 @@ let cardsDepuisDernierServiceFait = cards.slice(0, dernierServiceFaitIndex === -
  */
 const AUTRE_ÉTIQUETTE = '__autre__'
 
+const PRODUIT_LABEL = 'Produit'
+const DÉPLOIEMENT_LABEL = 'Déploiement'
+
 /** @type {Map<Label['name'], Card[]>} */
 const cardParÉtiquette = new Map()
 
@@ -137,20 +140,27 @@ function addCard(card, labelName){
 for(const card of cardsDepuisDernierServiceFait){
     const {labels} = card
 
+    let produitOuDéploiement = false; 
+
     if(Array.isArray(labels) && labels.length >= 1){
-        for(const {name} of labels){
-            addCard(card, name)
+        if(labels.find(l => l.name === PRODUIT_LABEL)){
+            addCard(card, PRODUIT_LABEL)
+            produitOuDéploiement = true
         }
-    }
-    else{
-        addCard(card, AUTRE_ÉTIQUETTE)
+        
+        if(labels.find(l => l.name === DÉPLOIEMENT_LABEL)){
+            addCard(card, DÉPLOIEMENT_LABEL)
+            produitOuDéploiement = true
+        }
+        
+        if(!produitOuDéploiement){
+            addCard(card, AUTRE_ÉTIQUETTE)
+        }
     }
 }
 
 //console.log('cardParÉtiquette', cardParÉtiquette)
 
-const PRODUIT_LABEL = 'Produit'
-const DÉPLOIEMENT_LABEL = 'Déploiement'
 
 const donnéesPourTemplateServiceFait = {}
 
